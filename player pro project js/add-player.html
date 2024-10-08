@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Player</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            padding: 40px;
+            color: white;
+        }
+
+        .form-container {
+            background-color: #0f3460;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 25px;
+        }
+
+        .form-container input, .form-container select {
+            background-color: #16213e;
+            color: white;
+        }
+
+        .form-container button {
+            background-color: #e94560;
+            color: white;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #ff6363;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Add New Player</h2>
+        <form id="playerForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+
+            <label for="age">Age</label>
+            <input type="number" id="age" required>
+
+            <label for="role">Role</label>
+            <select id="role" required>
+                <option value="opening Batsman">Opening Batsman</option>
+            <option value="Middle-order Batsman">Middle-order Batsman</option>
+            <option value="Top-order Batsman">Top-order Batsman</option>
+            <option value="No. 3 Batsman">No. 3 Batsman</option>
+            <option value="No. 4 Batsman">No. 4 Batsman</option>
+            <option value="No. 5 Batsman">No. 5 Batsman</option>
+            <option value="No. 6 Batsman">No. 6 Batsman</option>
+            <option value="All-rounder">All-rounder</option>
+            <option value="Fast Bowler">Fast Bowler</option>
+            <option value="Spin Bowler">Spin Bowler</option>
+            <option value="Slow Bowler">Slow Bowler</option>
+            <option value="Wicketkeeper">Wicketkeeper</option>
+            <option value="Captain">Captain</option>
+            <option value="Vice-Captain">Vice-Captain</option>
+            </select>
+
+            <button type="submit">Add Player</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('playerForm');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const role = document.getElementById('role').value;
+
+            const players = JSON.parse(localStorage.getItem('players')) || [];
+            players.push({ name, age, role });
+            localStorage.setItem('players', JSON.stringify(players));
+
+            window.location.href = 'index.html'; // Redirect back to the main page
+        });
+    </script>
+
+</body>
+</html>

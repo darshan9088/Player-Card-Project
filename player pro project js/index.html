@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Card Project</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <
+</head>>
+
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="images/mm.png" alt="Logo" class="logo">
+        </div>
+
+        <h1>Player Card Project</h1>
+        <a href="add-player.html">
+            <button id="addPlayerBtn">Add New Player</button>
+        </a>
+    </header>
+
+    <main>
+        <div class="main-content" id="playerList">
+            <!-- Player cards will be added here dynamically -->
+        </div>
+    </main>
+
+    <footer>
+
+        <div class="legal-links">
+            <a href="#" id="openTerms">Terms & Conditions</a> |
+            <a href="#" id="openPrivacy">Privacy Policy</a>
+        </div>
+    
+        <!-- Terms and Conditions Modal -->
+        <div class="modal-popup" id="termsModal">
+            <div class="modal-content">
+                <h3>Terms and Conditions</h3>
+                <p>By using this site, you agree to the following terms and conditions:</p>
+                <ul>
+                    <li>The information provided on this site is for entertainment and informational purposes only.</li>
+                    <li>We do not guarantee the accuracy or completeness of the data displayed.</li>
+                    <li>You agree not to misuse the website for any unlawful purposes.</li>
+                    <li>We reserve the right to make changes to the website and these terms at any time.</li>
+                </ul>
+                <button class="close-modal" onclick="closeModal('termsModal')">Close</button>
+            </div>
+        </div>
+    
+        <!-- Privacy Policy Modal -->
+        <div class="modal-popup" id="privacyModal">
+            <div class="modal-content">
+                <h3>Privacy Policy</h3>
+                <p>We respect your privacy. Our privacy policy includes the following points:</p>
+                <ul>
+                    <li>We do not collect personal information unless you provide it voluntarily (such as when signing up).</li>
+                    <li>Any information you provide is used solely for communication or project-related updates.</li>
+                    <li>We do not share your information with third parties without your consent.</li>
+                    <li>Our website may use cookies to improve user experience.</li>
+                </ul>
+                <button class="close-modal" onclick="closeModal('privacyModal')">Close</button>
+            </div>
+        </div>
+
+        <!-- <div class="terms-conditions" id="terms-conditions">
+            <h3>Terms and Conditions</h3>
+            <p>By using this site, you agree to the following terms and conditions:</p>
+            <h6>
+                The information provided on this site is for entertainment and informational purposes only.
+                We do not guarantee the accuracy or completeness of the data displayed.
+                You agree not to misuse the website for any unlawful purposes.
+                We reserve the right to make changes to the website and these terms at any time.</h6>
+        </div>
+
+        <div class="privacy-policy" id="privacy-policy">
+            <h3>Privacy Policy</h3>
+            <p>We respect your privacy. Our privacy policy includes the following points:</p>
+            <h6>
+                We do not collect personal information unless you provide it voluntarily (such as when signing up).
+                Any information you provide is used solely for communication or project-related updates.
+                We do not share your information with third parties without your consent.
+                Our website may use cookies to improve user experience.</h6>
+        </div> -->
+        <p>&copy; 2024 Player Card Project. All rights reserved. Contact Us: <a href="mailto:pateldarshan9088@gmail.com">pateldarshan9088@gmail.com</a> Developed by <a href="https://instagram.com/_darshan_daslaniya_">Darshan Patel</a></p>
+    </footer>
+
+    <!-- Popup for Editing Role -->
+    <div class="popup" id="editPopup">
+        <h3>Edit Player Role</h3>
+        <select id="editRoleSelect" required>
+            <option value="opening Batsman">Opening Batsman</option>
+            <option value="Middle-order Batsman">Middle-order Batsman</option>
+            <option value="Top-order Batsman">Top-order Batsman</option>
+            <option value="No. 3 Batsman">No. 3 Batsman</option>
+            <option value="No. 4 Batsman">No. 4 Batsman</option>
+            <option value="No. 5 Batsman">No. 5 Batsman</option>
+            <option value="No. 6 Batsman">No. 6 Batsman</option>
+            <option value="All-rounder">All-rounder</option>
+            <option value="Fast Bowler">Fast Bowler</option>
+            <option value="Spin Bowler">Spin Bowler</option>
+            <option value="Slow Bowler">Slow Bowler</option>
+            <option value="Wicketkeeper">Wicketkeeper</option>
+            <option value="Captain">Captain</option>
+            <option value="Vice-Captain">Vice-Captain</option>
+        </select>
+        <button onclick="saveRole()">Save</button>
+    </div>
+
+    <script>
+        let currentEditingIndex = -1;
+
+        function toggleDetails(button) {
+            const playerBox = button.parentElement;
+            playerBox.classList.toggle('show');
+            button.textContent = playerBox.classList.contains('show') ? 'Hide Details' : 'Show Details';
+        }
+
+        function removePlayer(index) {
+            const players = JSON.parse(localStorage.getItem('players')) || [];
+            players.splice(index, 1); // Remove the player from the array
+            localStorage.setItem('players', JSON.stringify(players));
+            loadPlayers(); // Reload the player list
+        }
+
+        function editRole(index) {
+            currentEditingIndex = index;
+            const players = JSON.parse(localStorage.getItem('players')) || [];
+            const player = players[index];
+            document.getElementById('editRoleSelect').value = player.role; // Set the current role
+            document.getElementById('editPopup').classList.add('active'); // Show the popup
+        }
+
+        function saveRole() {
+            const newRole = document.getElementById('editRoleSelect').value;
+            const players = JSON.parse(localStorage.getItem('players')) || [];
+            if (currentEditingIndex >= 0) {
+                players[currentEditingIndex].role = newRole; // Update the role
+                localStorage.setItem('players', JSON.stringify(players));
+                loadPlayers(); // Reload the player list
+                document.getElementById('editPopup').classList.remove('active'); // Hide the popup
+            }
+        }
+
+        function addPlayerCard(name, age, role, index) {
+            const playerList = document.getElementById('playerList');
+            const playerBox = document.createElement('div');
+            playerBox.className = 'player-box';
+
+            playerBox.innerHTML = `
+                <div class="player-name">${name}</div>
+                <button class="details-button" onclick="toggleDetails(this)">Show Details</button>
+                <div class="player-details">
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Age:</strong> ${age}</p>
+                    <p><strong>Role:</strong> ${role}</p>
+                    <button class="remove-button" onclick="removePlayer(${index})">Remove</button>
+                    <button class="edit-button" onclick="editRole(${index})">Edit Role</button>
+                </div>
+            `;
+            playerList.appendChild(playerBox);
+        }
+
+        function loadPlayers() {
+            const playerList = document.getElementById('playerList');
+            playerList.innerHTML = ''; // Clear previous content
+            const players = JSON.parse(localStorage.getItem('players')) || [];
+            players.forEach((player, index) => {
+                addPlayerCard(player.name, player.age, player.role, index);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPlayers);
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        // Function to close the modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Attach event listeners to open the modals
+        document.getElementById('openTerms').addEventListener('click', function (event) {
+            event.preventDefault();
+            openModal('termsModal');
+        });
+        
+        document.getElementById('openPrivacy').addEventListener('click', function (event) {
+            event.preventDefault();
+            openModal('privacyModal');
+        });
+    </script>
+
+</body>
+
+</html>

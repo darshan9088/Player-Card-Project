@@ -1,0 +1,340 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a2e;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: #0f3460;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.8em;
+    font-weight: 600;
+    margin-right: 640px;
+}
+
+header button {
+    background-color: #e94560;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+header button:hover {
+    background-color: #ff6363;
+    transform: translateY(-3px);
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+.player-box {
+    background-color: #16213e;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.player-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.player-name {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.details-button {
+    background-color: #53354a;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.details-button:hover {
+    background-color: #ff2e63;
+}
+
+.player-details {
+    display: none;
+    margin-top: 15px;
+    text-align: left;
+    background-color: #1b262c;
+    padding: 15px;
+    border-top: 2px solid #e94560;
+    border-radius: 15px;
+}
+
+.player-box.show .player-details {
+    display: block;
+}
+
+.remove-button,
+.edit-button,
+.save-button {
+    background-color: #ff2e63;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.remove-button:hover,
+.edit-button:hover,
+.save-button:hover {
+    background-color: #ff4747;
+}
+
+/* Popup Styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0f3460;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.popup.active {
+    display: block;
+}
+
+.popup h3 {
+    color: #e94560;
+}
+
+.popup select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #16213e;
+    color: white;
+    border: none;
+    border-radius: 25px;
+}
+
+.popup button {
+    background-color: #e94560;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 25px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #ff6363;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    background-color: #0f3460;
+    color: #fff;
+    text-align: center;
+    padding: 5px 15px;
+    /* Further reduced padding */
+    margin-top: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 100%;
+    font-size: 0.85em;
+    /* Slightly smaller overall font size */
+}
+
+footer p {
+    margin: 3px 0;
+    /* Reduced margins for paragraph text */
+    font-size: 1.2em;
+}
+
+footer a {
+    color: #e94560;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ff6363;
+}
+
+.legal-links {
+    margin: 8px 0;
+    font-size: 0.85em;
+}
+
+.terms-conditions,
+.privacy-policy {
+    margin: 5px 0;
+    font-size: 0.8em;
+    /* Smaller text for terms and privacy */
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.terms-conditions h3,
+.privacy-policy h3 {
+    font-size: 1em;
+    /* Further reduced heading size */
+    color: #e94560;
+    margin-bottom: 5px;
+}
+
+.terms-conditions h6,
+.privacy-policy h6 {
+    font-size: 0.75em;
+    /* Smaller subtext */
+    margin-bottom: 5px;
+    line-height: 1.2;
+    /* Tighter line spacing */
+}
+
+
+.terms-conditions h3,
+.privacy-policy h3 {
+    font-size: 1.1em;
+    /* Slightly smaller heading */
+    color: #e94560;
+    margin-bottom: 8px;
+}
+
+.terms-conditions h6,
+.privacy-policy h6 {
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    /* Better line spacing */
+}
+
+
+.terms-conditions ul,
+.privacy-policy ul {
+    margin: 10px 0 0 20px;
+}
+
+.terms-conditions li,
+.privacy-policy li {
+    margin: 5px 0;
+}
+
+.terms-conditions h3,
+.privacy-policy h3 {
+    color: #e94560;
+    margin-bottom: 10px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 80px;
+    /* Adjust the size as needed */
+    height: auto;
+    margin-right: 15px;
+    /* Space between logo and title */
+}
+
+/* Modal Popup Styles */
+.modal-popup {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    bottom: 0;
+    /* Keep it near the footer */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    background-color: #0f3460;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.modal-content {
+    color: #fff;
+    text-align: left;
+}
+
+.modal-popup h3 {
+    color: #e94560;
+    margin-bottom: 10px;
+}
+
+.modal-popup ul {
+    margin-top: 10px;
+}
+
+.modal-popup li {
+    margin-bottom: 5px;
+}
+
+.close-modal {
+    background-color: #e94560;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 25px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.close-modal:hover {
+    background-color: #ff6363;
+}
